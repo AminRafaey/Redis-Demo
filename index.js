@@ -15,6 +15,7 @@ client.on("error", (err) => console.log("Redis Client Error", err));
 console.log(process.env.REDIS_URL);
 (async () => {
   await client.connect();
+  console.log(client.get('amin'));
 })();
 
 const app = express();
