@@ -1,14 +1,18 @@
 const express = require("express");
 const fetch = require("axios");
 const redis = require("redis");
+require('dotenv').config({path: __dirname + '/.env'})
 
 const PORT = process.env.PORT || 5000;
 const REDIS_PORT = process.env.REDIS_PORT || 6379;
-const client = redis.createClient(REDIS_PORT);
+const client = redis.createClient({
+  url: process.env.REDIS_URL,
+});
 
 client.on("connect", () => console.log("Redis has been connected"));
 client.on("error", (err) => console.log("Redis Client Error", err));
 
+console.log(process.env.REDIS_URL);
 (async () => {
   await client.connect();
 })();
